@@ -1,6 +1,0 @@
-2012-03-23 13:27:23  http://manhua.178.com/cddht/ :CInternetException in SavePicAsZipReally : 无法解析服务器的名称或地址
- ,0
-
-2012-03-23 13:32:33  http://manhua.178.com/cddht/ :CInternetException in SavePicAsZipReally : 操作超时
- ,0
-
