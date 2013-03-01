@@ -1,0 +1,20 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "MockBude", "MockBude\MockBude.vcproj", "{627D125A-9A7D-4507-B57F-4EF12DD1AD62}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{627D125A-9A7D-4507-B57F-4EF12DD1AD62}.Debug|Win32.ActiveCfg = Debug|Win32
+		{627D125A-9A7D-4507-B57F-4EF12DD1AD62}.Debug|Win32.Build.0 = Debug|Win32
+		{627D125A-9A7D-4507-B57F-4EF12DD1AD62}.Release|Win32.ActiveCfg = Release|Win32
+		{627D125A-9A7D-4507-B57F-4EF12DD1AD62}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

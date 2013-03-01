@@ -1,0 +1,7 @@
+2011-06-11 20:12:34  http://manhua.178.com/m/manhuajiayuzhushoumen.shtml  SUCCESS
+2011-06-11 20:20:53  http://manhua.178.com/m/manhuajiayuzhushoumen.shtml  SUCCESS
+2012-12-30 01:30:38  http://manhua.178.com/m/manhuajiayuzhushoumen.shtml :CInternetException in SavePicAsZipReally : 操作超时
+ ,0
+
+2012-12-30 01:30:38  http://manhua.178.com/m/manhuajiayuzhushoumen.shtml :SavePicAsFile http://imgfastd.manhua.178.com/m/漫画家与助手们/漫助番外篇/001.jpg fail, remain 4 ,retry...
+2012-12-31 20:41:34  http://manhua.178.com/m/manhuajiayuzhushoumen.shtml漫助番外篇  SUCCESS

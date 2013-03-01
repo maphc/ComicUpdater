@@ -1,0 +1,3 @@
+2013-01-09 13:35:20  http://comic.xxbh.net/colist_227893.htmlµÚ11¾í  SUCCESS
+2013-01-25 16:20:26  http://comic.xxbh.net/colist_227893.html :SavePicAsZipReally http://a16.dm08.com/h50/201301/25131251zkfsk5mx3zp.jpg abnormal status code :400
+2013-01-25 16:20:26  http://comic.xxbh.net/colist_227893.html :SavePicAsFile http://a16.dm08.com/h50/201301/25131251zkfsk5mx3zp.jpg fail, remain 4 ,retry...

@@ -1,0 +1,152 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="源文件">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="头文件">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="资源文件">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav</Extensions>
+    </Filter>
+    <Filter Include="下载类">
+      <UniqueIdentifier>{61a126f6-0666-4432-be48-e5f30d0a6d7b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="文档">
+      <UniqueIdentifier>{ad2082ce-6ef0-4a51-98bd-39a78847008f}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="ComicUpdater2.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="ComicUpdater2Dlg.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="MsgDlg.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="stdafx.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="VolDlg.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Acg178Downloader.cpp">
+      <Filter>下载类</Filter>
+    </ClCompile>
+    <ClCompile Include="Dm5Downloader.cpp">
+      <Filter>下载类</Filter>
+    </ClCompile>
+    <ClCompile Include="Downloader.cpp">
+      <Filter>下载类</Filter>
+    </ClCompile>
+    <ClCompile Include="XxbhDownloader.cpp">
+      <Filter>下载类</Filter>
+    </ClCompile>
+    <ClCompile Include="ioapi.c">
+      <Filter>头文件</Filter>
+    </ClCompile>
+    <ClCompile Include="zip.c">
+      <Filter>头文件</Filter>
+    </ClCompile>
+    <ClCompile Include="zutil.c">
+      <Filter>头文件</Filter>
+    </ClCompile>
+    <ClCompile Include="PyHelper.cpp">
+      <Filter>下载类</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="ComicUpdater2.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ComicUpdater2Dlg.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="deelx.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="MsgDlg.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="mydef.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="stdafx.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="targetver.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="VolDlg.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Acg178Downloader.h">
+      <Filter>下载类</Filter>
+    </ClInclude>
+    <ClInclude Include="Dm5Downloader.h">
+      <Filter>下载类</Filter>
+    </ClInclude>
+    <ClInclude Include="Downloader.h">
+      <Filter>下载类</Filter>
+    </ClInclude>
+    <ClInclude Include="XxbhDownloader.h">
+      <Filter>下载类</Filter>
+    </ClInclude>
+    <ClInclude Include="zconf.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="zlib.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ioapi.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="zutil.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="zip.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="crypt.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="PyHelper.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="res\ComicUpdater2.ico">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="res\ComicUpdater2.rc2">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="acg178.txt">
+      <Filter>文档</Filter>
+    </None>
+    <None Include="dm5.old.txt">
+      <Filter>文档</Filter>
+    </None>
+    <None Include="dm5.txt">
+      <Filter>文档</Filter>
+    </None>
+    <None Include="ReadMe.txt" />
+    <None Include="ComicUpdater2.aps">
+      <Filter>头文件</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="ComicUpdater2.rc">
+      <Filter>资源文件</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+</Project>

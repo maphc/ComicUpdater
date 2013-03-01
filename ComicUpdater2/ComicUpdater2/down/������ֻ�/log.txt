@@ -1,0 +1,5 @@
+2012-12-29 15:20:31  http://manhua.178.com/jingjiedelunhui/第175话  SUCCESS
+2012-12-29 15:23:20  http://manhua.178.com/jingjiedelunhui/第175话  SUCCESS
+2013-02-24 20:33:14  http://manhua.178.com/jingjiedelunhui/ :CInternetException in GetSimpleGet : URL 未使用可识别的协议
+ ,0
+
