@@ -84,8 +84,8 @@ BOOL CComicUpdater2Dlg::OnInitDialog()
 	
 	//down≥ı ºªØ
 	m_downKey.insert(map<CString,Downloader*>::value_type(_T("www.dm5.com"),new Dm5Downloader));
-	m_downKey.insert(map<CString,Downloader*>::value_type(_T("acg.178.com"),new Acg178Downloader));
-    m_downKey.insert(map<CString,Downloader*>::value_type(_T("manhua.178.com"),new Acg178Downloader));
+	m_downKey.insert(map<CString,Downloader*>::value_type(_T("manhua.178.com"),new Acg178Downloader));
+    m_downKey.insert(map<CString,Downloader*>::value_type(_T("www.dmzj.com"),new Acg178Downloader));
     m_downKey.insert(map<CString,Downloader*>::value_type(_T("comic.xxbh.net"),new XxbhDownloader));
 
 	

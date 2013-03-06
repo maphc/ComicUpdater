@@ -57,8 +57,8 @@ Acg178Downloader::~Acg178Downloader(void)
 
 vector<CString> Acg178Downloader::GetPicUrls( CString& strid )
 {
-	static CString server=_T("http://manhua.178.com");
-	static CString prefix(_T("http://acg.178.com/mh/imgs/"));
+	static CString server=_T("http://www.dmzj.com");
+	static CString prefix(_T("http://www.dmzj.com/mh/imgs/"));
 	//manhua.178.com
     //http://acg.178.com/mh/y/yuanzhikong.shtml
     //http://manhua.178.com/m/mitumaooverrun.shtml
