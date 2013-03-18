@@ -158,6 +158,9 @@ UINT DownPicThreadProc( LPVOID pParam ){
 				
                 vector<CString> picList=down->GetPicUrls(volUrl);
 				if(picList.size()==0){
+					volDlg->m_msgDlg.ShowWindow(SW_HIDE);
+					volDlg->EnableWindow(TRUE);
+					volDlg->isSuccess=FALSE;
 					return 0;
 				}
 

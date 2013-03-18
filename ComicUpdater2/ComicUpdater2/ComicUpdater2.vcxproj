@@ -126,6 +126,7 @@
     <ClCompile Include="ioapi.c">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="Manhua8Downloader.cpp" />
     <ClCompile Include="MsgDlg.cpp" />
     <ClCompile Include="PyHelper.cpp" />
     <ClCompile Include="stdafx.cpp">
@@ -150,6 +151,7 @@
     <ClInclude Include="crypt.h" />
     <ClInclude Include="deelx.h" />
     <ClInclude Include="ioapi.h" />
+    <ClInclude Include="Manhua8Downloader.h" />
     <ClInclude Include="MsgDlg.h" />
     <ClInclude Include="mydef.h" />
     <ClInclude Include="PyHelper.h" />

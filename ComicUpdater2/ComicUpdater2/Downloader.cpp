@@ -309,7 +309,7 @@ BOOL Downloader::SavePicAsZipReally(CString volUrl,CString picUrl,CString path){
 			//http://comic.xxbh.net/201002/153506.html
 			//CString strReferer(picUrl);
 			CString strReferer(volUrl);
-			strReferer.Insert(0, _T("Referer:"));
+			strReferer.Insert(0, _T("Referer: "));
 			strReferer.Append(_T("\nUser-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.17 (KHTML, like Gecko) Chrome/24.0.1312.56 Safari/537.17"));
 
 			html=(CHttpFile*)session.OpenURL(addTail(EncodeUrlIfNecessery(picUrl)),1,INTERNET_FLAG_TRANSFER_BINARY | INTERNET_FLAG_RELOAD|INTERNET_FLAG_DONT_CACHE, strReferer, strReferer.GetLength());

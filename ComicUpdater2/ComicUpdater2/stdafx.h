@@ -45,6 +45,7 @@ using namespace std;
 #include "Dm5Downloader.h"
 #include "Acg178Downloader.h"
 #include "XxbhDownloader.h"
+#include "Manhua8Downloader.h"
 #include "mydef.h"
 #include "VolDlg.h"
 #include "MsgDlg.h"

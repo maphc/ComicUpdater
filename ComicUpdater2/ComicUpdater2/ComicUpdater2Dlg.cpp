@@ -87,6 +87,7 @@ BOOL CComicUpdater2Dlg::OnInitDialog()
 	m_downKey.insert(map<CString,Downloader*>::value_type(_T("manhua.178.com"),new Acg178Downloader));
     m_downKey.insert(map<CString,Downloader*>::value_type(_T("www.dmzj.com"),new Acg178Downloader));
     m_downKey.insert(map<CString,Downloader*>::value_type(_T("comic.xxbh.net"),new XxbhDownloader));
+	m_downKey.insert(map<CString,Downloader*>::value_type(_T("www.manhua1.com"),new Manhua8Downloader));
 
 	
 
