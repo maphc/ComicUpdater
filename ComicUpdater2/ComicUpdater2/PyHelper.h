@@ -32,7 +32,7 @@ public:
 	void printList(PyObject* l);
 
 	CString get178VolPages(CString h);
-
+	CString getIManhuaVolPages(CString h);
 
 };
 

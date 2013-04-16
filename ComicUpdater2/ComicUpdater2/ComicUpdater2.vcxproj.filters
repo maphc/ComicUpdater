@@ -63,6 +63,9 @@
     <ClCompile Include="Manhua8Downloader.cpp">
       <Filter>下载类</Filter>
     </ClCompile>
+    <ClCompile Include="IManhuaDownloader.cpp">
+      <Filter>下载类</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ComicUpdater2.h">
@@ -126,6 +129,9 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="Manhua8Downloader.h">
+      <Filter>下载类</Filter>
+    </ClInclude>
+    <ClInclude Include="IManhuaDownloader.h">
       <Filter>下载类</Filter>
     </ClInclude>
   </ItemGroup>

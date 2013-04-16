@@ -88,7 +88,7 @@ BOOL CComicUpdater2Dlg::OnInitDialog()
     m_downKey.insert(map<CString,Downloader*>::value_type(_T("www.dmzj.com"),new Acg178Downloader));
     m_downKey.insert(map<CString,Downloader*>::value_type(_T("comic.xxbh.net"),new XxbhDownloader));
 	m_downKey.insert(map<CString,Downloader*>::value_type(_T("www.manhua1.com"),new Manhua8Downloader));
-
+	m_downKey.insert(map<CString,Downloader*>::value_type(_T("www.imanhua.com"),new IManhuaDownloader));
 	
 
 	//数据初始化
@@ -276,7 +276,7 @@ Downloader* CComicUpdater2Dlg::GetDownloaderByKey(CString& url){
 
 	if(it!=m_downKey.end()){
 		Downloader* d=(*it).second->CreateNewInst();
-
+		d->SetServer(server);
 		if(d->Parse(url)){
 			return d;
 		}else{

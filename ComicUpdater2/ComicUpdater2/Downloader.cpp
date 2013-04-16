@@ -838,3 +838,8 @@ VOID Downloader::SetProxyPass( CHttpFile* f )
 
 	}
 }
+
+void Downloader::SetServer( CString server )
+{
+	this->server=server;
+}

@@ -57,7 +57,7 @@ void PyHelper::initMulti()
 }
 PyHelper::~PyHelper(){
 	// 保证子线程调用都结束后
-	PyGILState_Ensure();
+	//PyGILState_Ensure();
 	Py_Finalize();
 
 }
@@ -161,8 +161,9 @@ CString PyHelper::get178VolPages( CString h )
 		
 
 	}
-	return result;
 	Py_Finalize();
+	return result;
+	
 }
 void PyHelper::printExceptionMessage(){
 	char buf[512], *buf_p = buf;
@@ -227,5 +228,77 @@ void PyHelper::init()
 
 	PyRun_SimpleString("import os");
 	PyRun_SimpleString("import sys");
-	PyRun_SimpleString("sys.path.append('./scripts')");
+	PyRun_SimpleString("sys.path.append('.\\scripts')");
+	
+	if(PyErr_Occurred()){
+		printExceptionMessage();
+		PyErr_Clear();
+	}
+	TRACE1(_T("Py_GetPath :%s\n"),Py_GetPath());
+	TRACE1(_T("Py_GetProgramFullPath :%s\n"),Py_GetProgramFullPath());
+	TRACE1(_T("Py_GetProgramName :%s\n"),Py_GetProgramName());
+}
+
+CString PyHelper::getIManhuaVolPages( CString h )
+{
+	init();
+	CString result;
+
+	PyObject* imanhua=PyImport_ImportModule("imanhua");
+	if (imanhua==NULL||PyErr_Occurred())
+	{
+		TRACE0(_T("imanhua 加载失败"));
+		return "";
+	}
+	PyObject* getPages= NULL;
+	
+	try
+	{
+		getPages=PyObject_GetAttrString(imanhua,"getPages");
+		if(PyFunction_Check(getPages)){
+			TRACE0(_T("PyFunction getPages is OK\n"));
+		}
+	}
+	catch (exception &e)
+	{
+		TRACE1("Python exception %s\n",e.what());
+		MessageBox(NULL,e.what(),_T("Python Error"),MB_OK);
+	}
+
+	if(PyErr_Occurred()){
+		PyErr_Print();
+		PyErr_Clear();
+	}
+
+	PyObject* resp=NULL;
+	try
+	{
+		resp=PyObject_CallFunction(getPages,"s",(LPCTSTR)h);
+		//resp=PyObject_CallFunction(getPages,"s","aaa");
+
+		if(PyErr_Occurred()){
+
+			printExceptionMessage();
+			PyErr_Clear();
+		}
+	}catch (exception &e)
+	{
+		TRACE1("Python exception %s\n",e.what());
+		MessageBox(NULL,e.what(),_T("Python Error"),MB_OK);
+
+	}
+
+	if(resp==NULL){
+		Py_DECREF(resp);
+		Py_DECREF(getPages);
+
+	}else{
+		result=PyString_AsString(resp);
+		Py_DECREF(resp);
+		Py_DECREF(getPages);
+
+	}
+	Py_Finalize();
+	return result;
+	
 }

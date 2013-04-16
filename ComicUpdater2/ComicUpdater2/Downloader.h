@@ -23,6 +23,7 @@ protected:
     vector<CString> volList;
     map<CString,CString> volCache;
 
+	CString server;
 	CString url;
 	CString lastDate;
 	CString lastVol;
@@ -46,6 +47,7 @@ public:
     virtual VOID SetPageEncoding(UINT);
 	virtual LPCTSTR GetTitle();
 	LPCTSTR GetUrl();
+	virtual void SetServer(CString server);
 	BOOL SavePicAsFile(CString volUrl,CString picUrl,CString fileName);
 	virtual vector<CString> GetPicUrls(CString& url)=0;
 	vector<CString>* GetVolList();
