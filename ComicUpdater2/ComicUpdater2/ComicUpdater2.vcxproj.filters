@@ -19,6 +19,9 @@
     <Filter Include="文档">
       <UniqueIdentifier>{ad2082ce-6ef0-4a51-98bd-39a78847008f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="scripts">
+      <UniqueIdentifier>{ff193a27-e1e8-425d-9c3f-96b26674bcae}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ComicUpdater2.cpp">
@@ -64,6 +67,9 @@
       <Filter>下载类</Filter>
     </ClCompile>
     <ClCompile Include="IManhuaDownloader.cpp">
+      <Filter>下载类</Filter>
+    </ClCompile>
+    <ClCompile Include="V8Helper.cpp">
       <Filter>下载类</Filter>
     </ClCompile>
   </ItemGroup>
@@ -134,6 +140,9 @@
     <ClInclude Include="IManhuaDownloader.h">
       <Filter>下载类</Filter>
     </ClInclude>
+    <ClInclude Include="V8Helper.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="res\ComicUpdater2.ico">
@@ -154,6 +163,12 @@
     <None Include="ReadMe.txt" />
     <None Include="ComicUpdater2.aps">
       <Filter>头文件</Filter>
+    </None>
+    <None Include="scripts\imanhua.py">
+      <Filter>scripts</Filter>
+    </None>
+    <None Include="scripts\manhua178.py">
+      <Filter>scripts</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>

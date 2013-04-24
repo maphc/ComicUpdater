@@ -66,7 +66,7 @@ public:
     static VOID GetMatchedList(CString& regStr, CString& t,vector<CString>& jsList);
 
 	int Downloader::httpgzdecompress(CFile* html,CString& res);
-
+	static vector<CString> Split(CString& str,LPTSTR token);
 protected:
 	BOOL SavePicAsFileReally(CString volUrl,CString picUrl,CString path);
 	BOOL SavePicAsZipReally(CString volUrl,CString picUrl,CString path);
@@ -74,7 +74,6 @@ protected:
 	UINT Ansi2Utf8(LPCSTR s,LPSTR szU8);
 	CString UrlEncode(LPSTR szU8,UINT n);
 
-	vector<CString> Split(CString& str,LPTSTR token);
 	VOID CloseCHttpFile(CHttpFile* html);
 	
 	BOOL IsMatched(CString& str,CString& regex);

@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "PyHelper.h"
+#include "V8Helper.h"
 
 //<h1>伊克西翁</h1>
 CRegexpT<TCHAR> IManhuaDownloader::titleRegex(_T("<h1>(.*?)</h1>"));
@@ -46,7 +47,8 @@ vector<CString> IManhuaDownloader::GetPicUrls( CString& strid )
 	
 	//CString arr=resp.Mid(pagesStart+pagesTag1.GetLength(),pagesEnd-pagesStart-pagesTag1.GetLength());
 	PyHelper pyHelper;
-	CString arr=pyHelper.getIManhuaVolPages(resp);
+	//CString arr=pyHelper.getIManhuaVolPages(resp);
+	CString arr=V8Helper::getIManhuaVolPages(resp);
 	if(arr==_T("")){
 		MessageBox(NULL,_T("没有找到图片列表,网络么问题的话就是改版了..."),_T("异常"),MB_OK);
 		return vector<CString>();

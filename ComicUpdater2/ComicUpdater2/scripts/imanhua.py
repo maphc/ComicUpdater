@@ -5,72 +5,70 @@ import os
 import sys
 import datetime
 import pprint
+from logging import *
+import logging.config
 
-DEBUG=True
+#DEBUG=True
+#datetime.datetime.today().strftime('%Y-%m-%d_%H-%M-%S')
 
-def logFile(s):
-	dt=datetime.datetime.today().strftime('%Y-%m-%d_%H-%M-%S')
-	if DEBUG==True:
-		with open(r'z:\log.txt','a') as f:
-			f.write('[{0}][imanhua]:{1}\n'.format(dt,str(s)))
-			
-	else:
-		print s
+#LOG_NAME=fn = string.join([os.getcwd(), os.path.sep, 'py_debug_', datetime.datetime.today().strftime('%Y-%m-%d'), '.log'], '')
+#FORMAT='%(asctime)s %(levelname)s %(module)s %(lineno)d %(message)s'
+#logging.basicConfig(filename=LOG_NAME,format=FORMAT,level=logging.DEBUG)
+logging.config.fileConfig('logging.conf')
+
+
 		
 def analyzePages(s):
-	logFile("begin analyzePages :"+s);
+	debug("begin analyzePages ");
 	ctx=PyV8.JSContext()
-	logFile("after JSContext");
+	debug("after JSContext");
 	ctx.enter()
-	logFile("after enter");
+	debug("after enter");
 	ctx.eval(s)
-	logFile("after eval(s) :"+str(dir(ctx.locals.cInfo)));
+	debug("after eval(s) ");
 	pages=ctx.eval('cInfo.files.toString()')
 	cid=ctx.eval('cInfo.cid')
 	bid=ctx.eval('cInfo.bid')
-	logFile('bid[{0}]cid[{1}]'.format(bid,cid))
+	debug('bid[{0}]cid[{1}]'.format(bid,cid))
 	ctx.leave()
-	logFile("after leave");
-	
+	debug("after leave");
+	del ctx
 	return pages,bid,cid
 		
 def logHtml(s):
 	with open(r'z:\log.html','w') as f:
 		f.write(s)
-def getPages(html):
-	return bak(html)
 	
 def getResult(s):
 	pages,bid,cid=analyzePages(s)
-	logFile("after analyzePages")
+	debug("after analyzePages")
 	l=pages.decode('utf8').encode('gbk').split(',')
 	result=','.join([r"http://c4.mangafiles.com/Files/Images/{0}/{1}/{2}".format(bid,cid,i) for i in l])
 	return result
 
-def bak(html):
+def getPages(html):
 	try:
-		logHtml(html);
+		#logHtml(html);
 		#evalstr=re.findall(r'var cInfo=.*?(?=</script>)',html)
 		evalstr=re.findall(r'eval\(function.*?(?=</script>)',html)
 		if len(evalstr) > 0:
-			logFile("eval function find")
+			debug("eval function find")
 			result=getResult(evalstr[0]);
 			
 		else:
 			cInfoStr=re.findall(r'var cInfo=.*?(?=</script>)',html)
 			if len(cInfoStr)>0:
-				logFile("plaintext js find")
+				debug("plaintext js find")
 				result=getResult(cInfoStr[0]);
 			else:
-				logFile("len(evalstr) <= 0")
+				debug("len(evalstr) <= 0")
 				#fn=os.getcwd()+os.path.sep+"err_"+datetime.datetime.today().strftime('%Y-%m-%d_%H-%M-%S')+"log"
 				fn = string.join([os.getcwd(), os.path.sep, 'err_html_', datetime.datetime.today().strftime('%Y-%m-%d_%H-%M-%S'), '.log'], '')
 				with open(fn, 'w') as errf:
 					errf.write(html)
 				result= ""
 	except BaseException as inst:
-			logFile("\nexception :"+str(type(inst)))
-			logFile("\nexception :"+str(inst.args))
+			debug("\nexception [{0}][{1}]".format( str(type(inst)) , str(inst.args) ))
 			result=''
 	
 	return result

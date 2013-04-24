@@ -88,7 +88,7 @@ vector<CString> XxbhDownloader::GetPicUrls( CString& strid )
     CString js0,js1,js2,jssvr;
 	UINT readIndex=0;
     GetSimpleGet(jsList.at(readIndex++),js0,strid);
-	if(js0.FindOneOf(_T("404 Not Found"))>-1){
+	if(js0.Find(_T("404 Not Found"))>-1){
 		GetSimpleGet(jsList.at(readIndex++),js0,strid);
 	}
     GetSimpleGet(jsList.at(readIndex++),js1,strid);

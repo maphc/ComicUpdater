@@ -20,7 +20,7 @@ private:
 	map< CString , PyObject* > moduleMap;
 private:
 	
-	void printExceptionMessage();
+	static void printExceptionMessage();
 	void init();
 public:
 	void initMulti();
@@ -28,11 +28,11 @@ public:
 
 	static PyHelper& getInstance();
 
-	void printDict(PyObject* o);
-	void printList(PyObject* l);
+	static void printDict(PyObject* o);
+	static void printList(PyObject* l);
 
 	CString get178VolPages(CString h);
 	CString getIManhuaVolPages(CString h);
-
+	static string getSimpleResp(CString input,CString moduleName,CString funcName);
 };
 

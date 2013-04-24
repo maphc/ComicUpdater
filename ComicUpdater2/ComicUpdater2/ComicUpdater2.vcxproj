@@ -59,8 +59,8 @@
     <CodeAnalysisRuleSet Condition="'$(Configuration)|$(Platform)'=='Template|Win32'">AllRules.ruleset</CodeAnalysisRuleSet>
     <CodeAnalysisRules Condition="'$(Configuration)|$(Platform)'=='Template|Win32'" />
     <CodeAnalysisRuleAssemblies Condition="'$(Configuration)|$(Platform)'=='Template|Win32'" />
-    <IncludePath Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">c:\Python26\include\;$(IncludePath)</IncludePath>
-    <LibraryPath Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">c:\Python26\libs\;$(LibraryPath)</LibraryPath>
+    <IncludePath Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">c:\Python27\include\;$(IncludePath);$(ProjectDir)\v8</IncludePath>
+    <LibraryPath Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">c:\Python27\libs\;$(LibraryPath);$(ProjectDir)\v8</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <Midl>
@@ -134,6 +134,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="V8Helper.cpp" />
     <ClCompile Include="VolDlg.cpp" />
     <ClCompile Include="Acg178Downloader.cpp" />
     <ClCompile Include="Dm5Downloader.cpp" />
@@ -160,6 +161,7 @@
     <ClInclude Include="Resource.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
+    <ClInclude Include="V8Helper.h" />
     <ClInclude Include="VolDlg.h" />
     <ClInclude Include="Acg178Downloader.h" />
     <ClInclude Include="Dm5Downloader.h" />
@@ -178,6 +180,8 @@
     <None Include="dm5.old.txt" />
     <None Include="dm5.txt" />
     <None Include="ReadMe.txt" />
+    <None Include="scripts\imanhua.py" />
+    <None Include="scripts\manhua178.py" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="ComicUpdater2.rc" />

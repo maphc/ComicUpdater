@@ -1,6 +1,6 @@
 #include "stdafx.h"
 #include "PyHelper.h"
-
+#include "V8Helper.h"
 //<span class="anim_title_text"><a href="../s/sszqdzjy.shtml"><h1>史上最强弟子兼一</h1></a></span>
 CRegexpT<TCHAR> Acg178Downloader::titleRegex(_T("<span class=\"anim_title_text\"><a href=.*><h1>(.+)</h1></a></span>"));
 //<a href="../t/tianjiangzhiwu/6772.shtml" >第39话</a>&nbsp;<br /><span class="update2">2010-05-30</span>	
@@ -83,7 +83,21 @@ vector<CString> Acg178Downloader::GetPicUrls( CString& strid )
 	
 	//CString arr=resp.Mid(pagesStart+pagesTag1.GetLength(),pagesEnd-pagesStart-pagesTag1.GetLength());
 	PyHelper pyHelper;
-	CString arr=pyHelper.get178VolPages(resp);
+	
+	CString arr;
+	try
+	{
+		//arr=pyHelper.get178VolPages(resp);
+		arr=V8Helper::get178VolPages(resp);
+	}
+	catch (exception &e)
+	{
+		TRACE1("Python exception %s\n",e.what());
+		MessageBox(NULL,e.what(),_T("Python Error"),MB_OK);
+	}catch(...){
+		MessageBox(NULL,_T("Python 初始化异常"),_T("Python Error"),MB_OK);
+	}
+
 	if(arr==_T("")){
 		MessageBox(NULL,_T("没有找到图片列表,网络么问题的话就是改版了..."),_T("异常"),MB_OK);
 		return vector<CString>();

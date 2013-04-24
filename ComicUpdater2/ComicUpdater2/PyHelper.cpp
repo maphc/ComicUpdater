@@ -58,7 +58,7 @@ void PyHelper::initMulti()
 PyHelper::~PyHelper(){
 	// 保证子线程调用都结束后
 	//PyGILState_Ensure();
-	Py_Finalize();
+	//Py_Finalize();
 
 }
 
@@ -146,7 +146,8 @@ CString PyHelper::get178VolPages( CString h )
 	{
 		TRACE1("Python exception %s\n",e.what());
 		MessageBox(NULL,e.what(),_T("Python Error"),MB_OK);
-		
+	}catch(...){
+		MessageBox(NULL,_T("Python 初始化异常"),_T("Python Error"),MB_OK);
 	}
 
 	if(resp==NULL){
@@ -157,8 +158,6 @@ CString PyHelper::get178VolPages( CString h )
 		result=PyString_AsString(resp);
 		Py_DECREF(resp);
 		Py_DECREF(getPages);
-
-		
 
 	}
 	Py_Finalize();
@@ -286,6 +285,8 @@ CString PyHelper::getIManhuaVolPages( CString h )
 		TRACE1("Python exception %s\n",e.what());
 		MessageBox(NULL,e.what(),_T("Python Error"),MB_OK);
 
+	}catch(...){
+		MessageBox(NULL,_T("Python 初始化异常"),_T("Python Error"),MB_OK);
 	}
 
 	if(resp==NULL){
@@ -301,4 +302,91 @@ CString PyHelper::getIManhuaVolPages( CString h )
 	Py_Finalize();
 	return result;
 	
+}
+
+string PyHelper::getSimpleResp( CString input,CString moduleName,CString funcName )
+{
+	Py_Initialize();
+
+	if(!Py_IsInitialized()){
+		TRACE0("python初始化失败");
+		if(PyErr_Occurred()){
+			PyErr_Print();
+			PyErr_Clear();
+		}
+		MessageBox(NULL,_T("Python INIT"),_T("Python init Error"),MB_OK);
+		return "";
+	}
+
+	PyRun_SimpleString("import os");
+	PyRun_SimpleString("import sys");
+	PyRun_SimpleString("sys.path.append('.\\scripts')");
+
+	if(PyErr_Occurred()){
+		printExceptionMessage();
+		PyErr_Clear();
+	}
+	TRACE1(_T("Py_GetPath :%s\n"),Py_GetPath());
+	TRACE1(_T("Py_GetProgramFullPath :%s\n"),Py_GetProgramFullPath());
+	TRACE1(_T("Py_GetProgramName :%s\n"),Py_GetProgramName());
+	string result;
+
+	PyObject* pyModule=PyImport_ImportModule(moduleName);
+	if (pyModule==NULL||PyErr_Occurred())
+	{
+		TRACE0(_T("imanhua 加载失败"));
+		return "";
+	}
+	PyObject* pyFunc= NULL;
+
+	try
+	{
+		pyFunc=PyObject_GetAttrString(pyModule,funcName);
+		if(PyFunction_Check(pyFunc)){
+			TRACE1(_T("PyFunction %s is OK\n"),funcName);
+		}
+	}
+	catch (exception &e)
+	{
+		TRACE1("Python exception %s\n",e.what());
+		MessageBox(NULL,e.what(),_T("Python Error"),MB_OK);
+	}
+
+	if(PyErr_Occurred()){
+		PyErr_Print();
+		PyErr_Clear();
+	}
+
+	PyObject* resp=NULL;
+	try
+	{
+		resp=PyObject_CallFunction(pyFunc,"s",(LPCTSTR)input);
+		//resp=PyObject_CallFunction(getPages,"s","aaa");
+
+		if(PyErr_Occurred()){
+
+			printExceptionMessage();
+			PyErr_Clear();
+		}
+	}catch (exception &e)
+	{
+		TRACE1("Python exception %s\n",e.what());
+		MessageBox(NULL,e.what(),_T("Python Error"),MB_OK);
+
+	}catch(...){
+		MessageBox(NULL,_T("Python 初始化异常"),_T("Python Error"),MB_OK);
+	}
+
+	if(resp==NULL){
+		Py_DECREF(resp);
+		Py_DECREF(pyFunc);
+
+	}else{
+		result=PyString_AsString(resp);
+		Py_DECREF(resp);
+		Py_DECREF(pyFunc);
+
+	}
+	Py_Finalize();
+	return result;
 }
