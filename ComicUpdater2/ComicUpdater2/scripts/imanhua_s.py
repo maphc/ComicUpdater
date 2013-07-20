@@ -55,19 +55,20 @@ def getPages(html):
 			result=evalstr[0]
 			
 		else:
-			cInfoStr=re.findall(r'var cInfo=.*?(?=</script>)',html)
-			if len(cInfoStr)>0:
+			plainstr=re.findall(r'var cInfo=.*?(?=</script>)',html)
+			if len(plainstr)>0:
 				debug("plaintext js find")
-				result=evalstr[0]
+				result=plainstr[0]
 			else:
-				debug("len(evalstr) <= 0")
+				debug("len(plainstr) <= 0")
 				#fn=os.getcwd()+os.path.sep+"err_"+datetime.datetime.today().strftime('%Y-%m-%d_%H-%M-%S')+"log"
 				fn = string.join([os.getcwd(), os.path.sep, 'err_html_', datetime.datetime.today().strftime('%Y-%m-%d_%H-%M-%S'), '.log'], '')
 				with open(fn, 'w') as errf:
 					errf.write(html)
 				result= ""
 	except BaseException as inst:
-			debug("\nexception [{0}][{1}]".format( str(type(inst)) , str(inst.args) ))
+			info=sys.exc_info()
+			error('exception :{0}-{1}'.format( info[0], info[1]  ),exc_info=1)
 			result=''
 	
 	return result

@@ -8,5 +8,6 @@
 namespace V8Helper{
 	CString get178VolPages(CString h);
 	CString getIManhuaVolPages(CString h);
+	void getXxbhInfo(CString js0,UINT& img_s,CString& msgs);
 
 }

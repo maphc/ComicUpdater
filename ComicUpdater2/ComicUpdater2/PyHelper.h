@@ -34,5 +34,6 @@ public:
 	CString get178VolPages(CString h);
 	CString getIManhuaVolPages(CString h);
 	static string getSimpleResp(CString input,CString moduleName,CString funcName);
+	CString getXxbhSvcListJs();
 };
 

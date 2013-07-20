@@ -422,6 +422,7 @@ CString Downloader::CreateNecessaryPath(LPCTSTR volName){
 	CreateDirectory(basePath,NULL);
 	CString filePath=basePath+_T("/")+title;
 	CreateDirectory(filePath,NULL);
+	DWORD dd=GetLastError();
 	filePath+=_T("/");
 	filePath+=volName;
 	if(USE_ZIP){

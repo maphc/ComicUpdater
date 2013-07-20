@@ -1,7 +1,0 @@
-[proxy]
-use_proxy=yes
-proxy_url=133.224.9.142:3186
-proxy_url-a=10.0.16.12:80
-user=test
-pass=123
-

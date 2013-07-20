@@ -390,3 +390,65 @@ string PyHelper::getSimpleResp( CString input,CString moduleName,CString funcNam
 	Py_Finalize();
 	return result;
 }
+
+CString PyHelper::getXxbhSvcListJs()
+{
+	Py_Initialize();
+
+	if(!Py_IsInitialized()){
+		TRACE0("python≥ı ºªØ ß∞‹");
+		if(PyErr_Occurred()){
+			PyErr_Print();
+			PyErr_Clear();
+		}
+		MessageBox(NULL,_T("Python INIT"),_T("Python init Error"),MB_OK);
+		return "";
+	}
+
+	PyRun_SimpleString("import os");
+	PyRun_SimpleString("import sys");
+	PyRun_SimpleString("sys.path.append('.\\scripts')");
+
+	if(PyErr_Occurred()){
+		printExceptionMessage();
+		PyErr_Clear();
+	}
+	TRACE1(_T("Py_GetPath :%s\n"),Py_GetPath());
+	TRACE1(_T("Py_GetProgramFullPath :%s\n"),Py_GetProgramFullPath());
+	TRACE1(_T("Py_GetProgramName :%s\n"),Py_GetProgramName());
+	CString result;
+
+	PyObject* pyModule=PyImport_ImportModule("xxbh_s");
+	if (pyModule==NULL||PyErr_Occurred())
+	{
+		TRACE0(_T("imanhua º”‘ÿ ß∞‹"));
+		return "";
+	}
+	PyObject* pyAttr= NULL;
+
+	try
+	{
+		pyAttr=PyObject_GetAttrString(pyModule,"svrListJs");
+		
+	}
+	catch (exception &e)
+	{
+		TRACE1("Python exception %s\n",e.what());
+		MessageBox(NULL,e.what(),_T("Python Error"),MB_OK);
+	}
+
+	if(PyErr_Occurred()){
+		PyErr_Print();
+		PyErr_Clear();
+	}
+
+	
+	if(pyAttr==NULL){
+		Py_DECREF(pyAttr);
+	}else{
+		result=PyString_AsString(pyAttr);
+		Py_DECREF(pyAttr);
+	}
+	Py_Finalize();
+	return result;
+}

@@ -1,5 +1,5 @@
 #include "stdafx.h"
-
+#include "V8Helper.h"
 
 //<li><h1>白银之匙</h1></li>
 CRegexpT<TCHAR> XxbhDownloader::titleRegex(_T("<li><h1>(.+)</h1></li>"));
@@ -91,43 +91,46 @@ vector<CString> XxbhDownloader::GetPicUrls( CString& strid )
 	if(js0.Find(_T("404 Not Found"))>-1){
 		GetSimpleGet(jsList.at(readIndex++),js0,strid);
 	}
-    GetSimpleGet(jsList.at(readIndex++),js1,strid);
-    GetSimpleGet(jsList.at(readIndex++),js2,strid);
-	GetSimpleGet(_T("http://img_v1.dm08.com/img_v1/cn_130117.js"),jssvr,strid);
-    
-    vector<CString> images_arr;
-    //Get_images_arr(js0,images_arr);
-	CString msgs=Downloader::GetMatchedStr(_T("var msg='([^']+)'"),js0);
-	vector<CString> msgList=Downloader::Split(msgs,_T("|"));
 
-    UINT img_s;
-    Get_img_s(js0,img_s);
+	GetSimpleGet(jsList.at(readIndex++),js1,strid);
+	GetSimpleGet(jsList.at(readIndex++),js2,strid);
 
-    vector<CString> servs;
-    Get_img_svraa(jssvr,servs);
+	vector<CString> images_arr;
 
+	UINT img_s;
+	vector<CString> msgList;
+
+	if(js0.Find(_T("eval"))==-1){
+		//Get_images_arr(js0,images_arr);
+		CString msgs=Downloader::GetMatchedStr(_T("var msg='([^']+)'"),js0);//
+		msgList=Downloader::Split(msgs,_T("|"));
+		Get_img_s(js0,img_s);
+
+	}else{
+		//新方式
+		CString msgs;
+		V8Helper::getXxbhInfo(js0,img_s, msgs);
+		msgList=Downloader::Split(msgs,_T("|"));
+
+	}
 	
+	js2.Remove(_T('\r'));
+	js2.Remove(_T('\n'));
+	CString svrListJs=Downloader::GetMatchedStr(_T("\ttsvrJs\\s*=\\s*'(.*?)';"),js2);
+	if(svrListJs=="" || svrListJs.Find(_T("http://"))!=0){
+		AfxMessageBox(_T("未找到服务列表"));
+		return a;
+	}
+	
+	GetSimpleGet(svrListJs,jssvr,strid);
+	vector<CString> servs;
+	Get_img_svraa(jssvr,servs);
+
+
 	for(UINT i=0;i<msgList.size();i++){
 		CString aUrl=servs.at(img_s)+msgList.at(i);
 		a.push_back(aUrl);
 	}
-
-	//if(sList.size()==2&&!sList.at(1).IsEmpty()){
-	//	
-	//	CString req,res;
-	//	req.Format(_T("http://comic.xxbh.net/a/showbaidu.php?coid=%s&%s=%s"),coid,sList.at(0),servs.at(atoi(sList.at(1))-1));
-	//	//http://comic.xxbh.net/a/showbaidu.php?coid=194224&s=http://222.218.156.16/h9/
-	//	//http://comic.xxbh.net/a/showbaidu.php?coid=194224&s=http%3A%2F%2F222.218.156.16%2Fh8%2F
-	//	//GetSimpleGet(req,res);
-	//	TRACE(_T("Response : %s"),res);
-	//	images_arr=Downloader::Split(res,_T(","));
-
-	//	for(UINT i=0;i<images_arr.size();i++){
-	//		CString picUrl=servs.at(img_s-1)+images_arr.at(i);
-	//		a.push_back(picUrl);
-	//	}
-	//}
- //   
     
 
 	return a;

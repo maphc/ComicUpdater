@@ -102,6 +102,9 @@ vector<CString> Acg178Downloader::GetPicUrls( CString& strid )
 		MessageBox(NULL,_T("没有找到图片列表,网络么问题的话就是改版了..."),_T("异常"),MB_OK);
 		return vector<CString>();
 	}
+
+	arr.Remove(_T(']'));
+	arr.Remove(_T('['));
 	arr.Replace(_T("\""),"");
 	vector<CString> pics=Split(arr,_T(","));
 
@@ -120,7 +123,7 @@ vector<CString> Acg178Downloader::GetPicUrls( CString& strid )
 	CString isFast=resp.Mid(fastStart+fastTag1.GetLength(),fastEnd-fastStart-fastTag1.GetLength()).Trim();
 
 	if(isFast=="true"){
-		prefix=_T("http://imgfastd.manhua.178.com/");
+		prefix=_T("http://imgfast.dmzj.com/");
 	}
 	if(isHot=="true"){
 		//prefix=_T("http://hot.manhua.178.com/");

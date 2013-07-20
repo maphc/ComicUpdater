@@ -8,7 +8,7 @@ namespace V8Helper{
 		//v8::Locker locker;
 		// Get the default Isolate created at startup.
 		string pyResp=PyHelper::getSimpleResp(h,"manhua178_s","getPages");
-		if(pyResp.c_str()==""){
+		if(pyResp.compare("")==0){
 			return "";
 		}
 		Isolate* isolate = Isolate::New();
@@ -62,7 +62,8 @@ namespace V8Helper{
 	}
 	CString getIManhuaVolPages(CString h){
 		string pyResp=PyHelper::getSimpleResp(h,"imanhua_s","getPages");
-		if(pyResp.c_str()==""){
+		
+		if(pyResp.compare("")==0){
 			return "";
 		}
 		Isolate* isolate = Isolate::New();
@@ -106,4 +107,36 @@ namespace V8Helper{
 
 		return result;
 	}
+
+	void getXxbhInfo(CString js0,UINT& img_s,CString& msgs){
+		Isolate* isolate = Isolate::New();
+		Isolate::Scope iscope(isolate);
+
+		// Create a stack-allocated handle scope.
+		HandleScope handle_scope(isolate);
+		// Create a new context.
+		Persistent<Context> context = Context::New();
+
+		// Enter the created context for compiling and
+		// running the hello world script. 
+		Context::Scope context_scope(context);
+
+		//execute the encrypt code
+		Script::Compile(String::New(js0))->Run();
+
+		//get the result
+		Handle<Value> hImg_s = Script::Compile(String::New("img_s"))->Run();
+		Handle<Value> hMsg = Script::Compile(String::New("msg"))->Run();
+		
+
+		msgs=CString(*String::AsciiValue(hMsg));
+		img_s=hImg_s->Int32Value();
+
+		// Dispose the persistent context.
+		context.Dispose(isolate);
+
+		// Convert the result to an ASCII string and print it.
+	
+	}
+
 }
