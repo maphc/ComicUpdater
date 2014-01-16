@@ -17,6 +17,7 @@ private:
 
 public:
 	virtual vector<CString> GetPicUrls(CString& url);
+	virtual vector<CString> GetPicUrls_Old(CString& url);
 	virtual Downloader* CreateNewInst();
 	virtual UINT GetPageEncoding();
 

@@ -47,6 +47,7 @@ using namespace std;
 #include "XxbhDownloader.h"
 #include "Manhua8Downloader.h"
 #include "IManhuaDownloader.h"
+#include "FzdmDownloader.h"
 #include "mydef.h"
 #include "VolDlg.h"
 #include "MsgDlg.h"
@@ -63,14 +64,6 @@ using namespace std;
 #ifndef _AFX_NO_AFXCMN_SUPPORT
 #include <afxcmn.h>                     // MFC 对 Windows 公共控件的支持
 #endif // _AFX_NO_AFXCMN_SUPPORT
-
-
-
-
-
-
-
-
 
 
 #ifdef _UNICODE

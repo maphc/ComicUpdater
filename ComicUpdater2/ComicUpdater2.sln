@@ -3,6 +3,8 @@ Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ComicUpdater2", "ComicUpdater2\ComicUpdater2.vcxproj", "{C8DA10A6-2F14-4885-A008-F2A53A5AC5E2}"
 EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "Setup1", "Setup1\Setup1.vdproj", "{50534C21-B670-4C75-B8A9-4F4C2C4E8E74}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -13,6 +15,8 @@ Global
 		{C8DA10A6-2F14-4885-A008-F2A53A5AC5E2}.Debug|Win32.Build.0 = Debug|Win32
 		{C8DA10A6-2F14-4885-A008-F2A53A5AC5E2}.Release|Win32.ActiveCfg = Release|Win32
 		{C8DA10A6-2F14-4885-A008-F2A53A5AC5E2}.Release|Win32.Build.0 = Release|Win32
+		{50534C21-B670-4C75-B8A9-4F4C2C4E8E74}.Debug|Win32.ActiveCfg = Debug
+		{50534C21-B670-4C75-B8A9-4F4C2C4E8E74}.Release|Win32.ActiveCfg = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

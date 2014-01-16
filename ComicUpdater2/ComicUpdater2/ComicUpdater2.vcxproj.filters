@@ -72,6 +72,9 @@
     <ClCompile Include="V8Helper.cpp">
       <Filter>下载类</Filter>
     </ClCompile>
+    <ClCompile Include="FzdmDownloader.cpp">
+      <Filter>下载类</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ComicUpdater2.h">
@@ -143,6 +146,9 @@
     <ClInclude Include="V8Helper.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="FzdmDownloader.h">
+      <Filter>下载类</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="res\ComicUpdater2.ico">
@@ -150,15 +156,6 @@
     </None>
     <None Include="res\ComicUpdater2.rc2">
       <Filter>资源文件</Filter>
-    </None>
-    <None Include="acg178.txt">
-      <Filter>文档</Filter>
-    </None>
-    <None Include="dm5.old.txt">
-      <Filter>文档</Filter>
-    </None>
-    <None Include="dm5.txt">
-      <Filter>文档</Filter>
     </None>
     <None Include="ReadMe.txt" />
     <None Include="ComicUpdater2.aps">
@@ -169,6 +166,18 @@
     </None>
     <None Include="scripts\manhua178.py">
       <Filter>scripts</Filter>
+    </None>
+    <None Include="scripts\imanhua_s.py">
+      <Filter>scripts</Filter>
+    </None>
+    <None Include="scripts\manhua178_s.py">
+      <Filter>scripts</Filter>
+    </None>
+    <None Include="scripts\xxbh_s.py">
+      <Filter>scripts</Filter>
+    </None>
+    <None Include="logging.conf">
+      <Filter>文档</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>

@@ -47,6 +47,7 @@ def getResult(s):
 	return result
 
 def getPages(html):
+	result=''
 	try:
 		#logHtml(html);
 		#evalstr=re.findall(r'var cInfo=.*?(?=</script>)',html)
@@ -68,9 +69,9 @@ def getPages(html):
 					errf.write(html)
 				result= ""
 	except BaseException as inst:
-			debug("\nexception [{0}][{1}]".format( str(type(inst)) , str(inst.args) ))
+			debug("exception [{0}][{1}]".format( str(type(inst)) , str(inst.args) ))
 			result=''
-	
+	debug("result size is %s"%len(result))
 	return result
 
 

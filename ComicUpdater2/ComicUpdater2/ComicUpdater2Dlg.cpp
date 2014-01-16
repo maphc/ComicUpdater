@@ -86,9 +86,11 @@ BOOL CComicUpdater2Dlg::OnInitDialog()
 	m_downKey.insert(map<CString,Downloader*>::value_type(_T("www.dm5.com"),new Dm5Downloader));
 	m_downKey.insert(map<CString,Downloader*>::value_type(_T("manhua.178.com"),new Acg178Downloader));
     m_downKey.insert(map<CString,Downloader*>::value_type(_T("www.dmzj.com"),new Acg178Downloader));
-    m_downKey.insert(map<CString,Downloader*>::value_type(_T("comic.xxbh.net"),new XxbhDownloader));
+	m_downKey.insert(map<CString,Downloader*>::value_type(_T("manhua.dmzj.com"),new Acg178Downloader));
+    m_downKey.insert(map<CString,Downloader*>::value_type(_T("mh.xxbh.net"),new XxbhDownloader));
 	m_downKey.insert(map<CString,Downloader*>::value_type(_T("www.manhua1.com"),new Manhua8Downloader));
 	m_downKey.insert(map<CString,Downloader*>::value_type(_T("www.imanhua.com"),new IManhuaDownloader));
+	m_downKey.insert(map<CString,Downloader*>::value_type(_T("manhua.fzdm.com"),new FzdmDownloader));
 	
 
 	//数据初始化
@@ -268,6 +270,9 @@ Downloader* CComicUpdater2Dlg::GetDownloaderByKey(CString& url){
 
 	if(url.GetLength()<8||url.Left(7)!=_T("http://")){
 		return NULL;
+	}
+	if(url.Right(1)!=_T('/')){
+		url=url+_T("/");
 	}
 
 	CString server= url.Mid(7,url.Find(_T("/"),8)-7);

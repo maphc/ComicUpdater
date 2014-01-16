@@ -111,7 +111,6 @@ UINT DownPicThreadProc( LPVOID pParam ){
 	volDlg->m_msgDlg.ShowWindow(SW_SHOW);
 	volDlg->EnableWindow(FALSE);
 	
-	
 	CListCtrl* m_volList=&volDlg->m_volList;
 	Downloader* down=volDlg->m_down;
 
@@ -155,7 +154,12 @@ UINT DownPicThreadProc( LPVOID pParam ){
 						return 0;
 					}
 				}
-				
+				if(volDlg->m_msgDlg.isTerminated){
+					volDlg->m_msgDlg.ShowWindow(SW_HIDE);
+					volDlg->EnableWindow(TRUE);
+					volDlg->isSuccess=FALSE;
+					return 0;
+				}
                 vector<CString> picList=down->GetPicUrls(volUrl);
 				if(picList.size()==0){
 					volDlg->m_msgDlg.ShowWindow(SW_HIDE);
@@ -163,19 +167,24 @@ UINT DownPicThreadProc( LPVOID pParam ){
 					volDlg->isSuccess=FALSE;
 					return 0;
 				}
-
+				if(volDlg->m_msgDlg.isTerminated){
+					volDlg->m_msgDlg.ShowWindow(SW_HIDE);
+					volDlg->EnableWindow(TRUE);
+					volDlg->isSuccess=FALSE;
+					return 0;
+				}
                 buf.Format(_T("正在创建路径 :%s"),name);
                 volDlg->m_msgDlg.SetDlgItemText(IDC_MSG,buf);	
                 CString path=down->CreateNecessaryPath(name);
                 UINT n=picList.size();
-                for(UINT j=0;j<n;j++){
+				for(UINT j=0;j<n;j++){
 
-                    if(volDlg->m_msgDlg.isTerminated){
-                        volDlg->m_msgDlg.ShowWindow(SW_HIDE);
-                        volDlg->EnableWindow(TRUE);
+					if(volDlg->m_msgDlg.isTerminated){
+						volDlg->m_msgDlg.ShowWindow(SW_HIDE);
+						volDlg->EnableWindow(TRUE);
 						volDlg->isSuccess=FALSE;
-                        return 0;
-                    }
+						return 0;
+					}
 
                     if(Downloader::USE_REAL_NAME){
                         down->SavePicAsFile(volUrl,picList.at(j),path);

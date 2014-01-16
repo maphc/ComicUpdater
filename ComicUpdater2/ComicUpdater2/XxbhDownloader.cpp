@@ -1,17 +1,17 @@
 #include "stdafx.h"
 #include "V8Helper.h"
-
+#include "PyHelper.h"
 //<li><h1>白银之匙</h1></li>
-CRegexpT<TCHAR> XxbhDownloader::titleRegex(_T("<li><h1>(.+)</h1></li>"));
+CRegexpT<TCHAR> XxbhDownloader::titleRegex(_T("\">([^>]*?)</a></em>"));
 //<li><b>更新</b>2011-04-05 02:16:46</li>
-CRegexpT<TCHAR> XxbhDownloader::lastDateRegex(_T("<li><b>.*?</b>(\\d{4}-\\d{1,2}-\\d{1,2} \\d{1,2}:\\d{1,2}:\\d{1,2})</li>"));
-//<li><a class="f_red" href="http://comic.xxbh.net/201104/189718.html" target="_blank" title="白银之匙 第1话">第1话</a></li>
-CRegexpT<TCHAR> XxbhDownloader::lastVolRegex(_T("<li><a[^>]*? target=\"_blank\" [^>]*?>([^\"]+?)</a></li>"));
+CRegexpT<TCHAR> XxbhDownloader::lastDateRegex(_T("更新时间：(\\d{4}-\\d{1,2}-\\d{1,2})"));
+//<li><a href="/comic/12912/121236.html" title="第553话" target="_blank" class="new">第553话<em></em></a></li>
+CRegexpT<TCHAR> XxbhDownloader::lastVolRegex(_T("target=\"_blank\" class=\"new\">([^\"]+?)<em></em></a></li>"));
 //<li><a class="f_red" href="http://comic.xxbh.net/201104/189718.html" target="_blank" title="白银之匙 第1话">第1话</a></li>
 //<li><a href="http://comic.xxbh.net/201103/187880.html" target="_blank" title="死神 441话">441话</a></li>
-CRegexpT<TCHAR> XxbhDownloader::volRegex(_T("<li><a[^>]*? href=\"([^\"]+?)\" [^>]*?>([^\"]+)</a></li>"));
+CRegexpT<TCHAR> XxbhDownloader::volRegex(_T("<li><a[^>]*? href=\"([^\"]+?)\" [^>]*?>([^\"]+)<em></em></a></li>"));
 //<div class="ar_list_coc">
-CRegexpT<TCHAR> XxbhDownloader::isMainRegex(_T("<div class=\"ar_list_coc\">"));
+CRegexpT<TCHAR> XxbhDownloader::isMainRegex(_T("<div class=\"bookInfo\">"));
 
 VOID Get_images_arr(CString& t,vector<CString>& imgs ){
 
@@ -20,7 +20,7 @@ VOID Get_images_arr(CString& t,vector<CString>& imgs ){
 }
 
 UINT XxbhDownloader::GetPageEncoding(){
-	return USE_UNICODE;
+	return USE_UTF8;
 }
 VOID Get_img_s(CString& t,UINT& n){
     CString img_s_reg(_T("var img_s = (\\d+);"));
@@ -66,7 +66,20 @@ XxbhDownloader::~XxbhDownloader(void)
 {
 }
 
-vector<CString> XxbhDownloader::GetPicUrls( CString& strid )
+vector<CString> XxbhDownloader::GetPicUrls(CString& strid ){
+	
+	CString resp;
+	if(strid.Left(1)==_T("/")){
+		strid=_T("http://mh.xxbh.net")+strid;
+	}
+	GetSimpleGet(strid,resp);
+	CString pics=PyHelper::getXxbhPics(resp);
+	vector<CString> a=this->Split(pics,",");
+
+	return a;
+}
+
+vector<CString> XxbhDownloader::GetPicUrls_Old( CString& strid )
 {
     
 
@@ -76,7 +89,7 @@ vector<CString> XxbhDownloader::GetPicUrls( CString& strid )
 	CString resp;
 	
 	if(strid.Left(1)==_T("/")){
-		strid=_T("http://comic.xxbh.net")+strid;
+		strid=_T("http://mh.xxbh.net")+strid;
 	}
 	GetSimpleGet(strid,resp);
 	
@@ -85,10 +98,10 @@ vector<CString> XxbhDownloader::GetPicUrls( CString& strid )
 	GetMatchedList(jsRex,resp,jsList);
 
 
-    CString js0,js1,js2,jssvr;
+	CString js0,js1,js2,jssvr;
 	UINT readIndex=0;
     GetSimpleGet(jsList.at(readIndex++),js0,strid);
-	if(js0.Find(_T("404 Not Found"))>-1){
+	if(js0.Find(_T("404 Not Found"))>-1||js0.Find(_T("Bad Request"))>-1){
 		GetSimpleGet(jsList.at(readIndex++),js0,strid);
 	}
 
@@ -113,18 +126,25 @@ vector<CString> XxbhDownloader::GetPicUrls( CString& strid )
 		msgList=Downloader::Split(msgs,_T("|"));
 
 	}
-	
+	vector<CString> servs;
 	js2.Remove(_T('\r'));
 	js2.Remove(_T('\n'));
 	CString svrListJs=Downloader::GetMatchedStr(_T("\ttsvrJs\\s*=\\s*'(.*?)';"),js2);
 	if(svrListJs=="" || svrListJs.Find(_T("http://"))!=0){
-		AfxMessageBox(_T("未找到服务列表"));
-		return a;
+		Get_img_svraa(js1,servs);
+		if(servs.size()==0){
+			AfxMessageBox(_T("未找到服务列表"));
+			return a;
+		}
+		//
+		//
+	}else{
+		GetSimpleGet(svrListJs,jssvr,strid);
+		
+		Get_img_svraa(jssvr,servs);
 	}
 	
-	GetSimpleGet(svrListJs,jssvr,strid);
-	vector<CString> servs;
-	Get_img_svraa(jssvr,servs);
+	
 
 
 	for(UINT i=0;i<msgList.size();i++){

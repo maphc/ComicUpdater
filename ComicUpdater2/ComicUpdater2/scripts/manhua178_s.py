@@ -38,5 +38,4 @@ def getPages(html):
 	except :
 		info=sys.exc_info()
 		error('exception :{0}-{1}'.format( info[0], info[1]  ),exc_info=1)	
-	debug('return :'+result)
 	return result

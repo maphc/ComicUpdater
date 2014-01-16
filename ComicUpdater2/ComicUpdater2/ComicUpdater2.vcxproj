@@ -61,6 +61,8 @@
     <CodeAnalysisRuleAssemblies Condition="'$(Configuration)|$(Platform)'=='Template|Win32'" />
     <IncludePath Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">c:\Python27\include\;$(IncludePath);$(ProjectDir)\v8</IncludePath>
     <LibraryPath Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">c:\Python27\libs\;$(LibraryPath);$(ProjectDir)\v8</LibraryPath>
+    <EmbedManifest Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</EmbedManifest>
+    <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</GenerateManifest>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <Midl>
@@ -123,6 +125,7 @@
   <ItemGroup>
     <ClCompile Include="ComicUpdater2.cpp" />
     <ClCompile Include="ComicUpdater2Dlg.cpp" />
+    <ClCompile Include="FzdmDownloader.cpp" />
     <ClCompile Include="IManhuaDownloader.cpp" />
     <ClCompile Include="ioapi.c">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
@@ -152,6 +155,7 @@
     <ClInclude Include="ComicUpdater2Dlg.h" />
     <ClInclude Include="crypt.h" />
     <ClInclude Include="deelx.h" />
+    <ClInclude Include="FzdmDownloader.h" />
     <ClInclude Include="IManhuaDownloader.h" />
     <ClInclude Include="ioapi.h" />
     <ClInclude Include="Manhua8Downloader.h" />
@@ -174,14 +178,15 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="ComicUpdater2.aps" />
+    <None Include="logging.conf" />
     <None Include="res\ComicUpdater2.ico" />
     <None Include="res\ComicUpdater2.rc2" />
-    <None Include="acg178.txt" />
-    <None Include="dm5.old.txt" />
-    <None Include="dm5.txt" />
     <None Include="ReadMe.txt" />
     <None Include="scripts\imanhua.py" />
+    <None Include="scripts\imanhua_s.py" />
     <None Include="scripts\manhua178.py" />
+    <None Include="scripts\manhua178_s.py" />
+    <None Include="scripts\xxbh_s.py" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="ComicUpdater2.rc" />

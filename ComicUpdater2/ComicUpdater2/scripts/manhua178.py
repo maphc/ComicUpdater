@@ -7,13 +7,13 @@ import os
 import logging.config
 import sys
 from logging import *
-import win32com.server.util, win32com.client
+
 
 #LOG_NAME=fn = string.join([os.getcwd(), os.path.sep, 'py_debug_', datetime.datetime.today().strftime('%Y-%m-%d'), '.log'], '')
 #FORMAT='%(asctime)s %(levelname)s %(module)s %(lineno)d %(message)s'
 #logging.basicConfig(filename=LOG_NAME,format=FORMAT,level=logging.DEBUG)
 logging.config.fileConfig('logging.conf')
-USE_PYV8=False
+USE_PYV8=True
 
 def dealWithPyV8(s,name):
 	debug('PyV8 begin analyzePages')
@@ -32,7 +32,7 @@ def dealWithPyV8(s,name):
 	pass
 
 def dealWithMSJS(s,name):
-	
+	import win32com.server.util, win32com.client
 	debug('MSJS begin analyzePages :'+name)
 	
 	ctx=win32com.client.Dispatch('MSScriptControl.ScriptControl')
