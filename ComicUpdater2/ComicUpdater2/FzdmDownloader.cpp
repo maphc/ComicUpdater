@@ -54,7 +54,9 @@ vector<CString> FzdmDownloader::GetPicUrls( CString& strid )
 		{
 			CString l=lines.at(i).Trim();
 			//        document.writeln('<img src="http://183.60.142.171/manhua/2014/01/151657120.jpg" id="mhpic" alt="火影忍者661话" />');
-			picUrl=GetMatchedStr(_T("document.writeln\\('<img src=\"(.*?)\".*"),l);
+			//picUrl=GetMatchedStr(_T("document.writeln\\('<img src=\"(.*?)\".*"),l);
+			//<li><img src="http://s2.fzdm.org/2014/02/051659450.jpg" id="mhpic" alt="火影忍者663话" />
+			picUrl=GetMatchedStr(_T("<li><img src=\"(.*?)\" id=\"mhpic\" .*"),l);
 			
 
 			if(picUrl==""){
