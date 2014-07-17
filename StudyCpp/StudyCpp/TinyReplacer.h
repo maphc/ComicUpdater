@@ -1,0 +1,1 @@
+/cygdrive/d/Workspace/VisualC/TinyReplacerPlugin/TinyReplacerPlugin/TinyReplacer.h

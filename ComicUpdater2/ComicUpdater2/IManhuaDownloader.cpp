@@ -5,7 +5,7 @@
 //<h1>伊克西翁</h1>
 CRegexpT<TCHAR> IManhuaDownloader::titleRegex(_T("<h1>(.*?)</h1>"));
 //</span>原作者：Capcom | 字母索引：<a href="/comic/Y">Y</a> | 加入时间：2013/4/15 | 更新时间：2013/4/15 </p>
-CRegexpT<TCHAR> IManhuaDownloader::lastDateRegex(_T("：(\\d+/\\d+/\\d+) </p>"));
+CRegexpT<TCHAR> IManhuaDownloader::lastDateRegex(_T("：(\\d+-\\d+-\\d+) </p>"));
 //<li><a href="/comic/54/list_80538.html" title="火影忍者627话正式版" target="_blank" class="new">火影忍者627话正式版<em></em></a></li>
 CRegexpT<TCHAR> IManhuaDownloader::lastVolRegex(_T("<li><a href=\".*?html\" title=\"(.*?)\" target=\"_blank\"( class=\"new\")?"));
 //<li><a href="/comic/54/list_80538.html" title="火影忍者627话正式版" target="_blank" class="new">火影忍者627话正式版<em></em></a></li>

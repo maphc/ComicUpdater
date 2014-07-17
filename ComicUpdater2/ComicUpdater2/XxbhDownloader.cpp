@@ -1,17 +1,19 @@
 #include "stdafx.h"
 #include "V8Helper.h"
 #include "PyHelper.h"
-//<li><h1>白银之匙</h1></li>
-CRegexpT<TCHAR> XxbhDownloader::titleRegex(_T("\">([^>]*?)</a></em>"));
-//<li><b>更新</b>2011-04-05 02:16:46</li>
+//<h2>火影忍者</h2>
+CRegexpT<TCHAR> XxbhDownloader::titleRegex(_T("<h2>([^>]*?)</h2>"));
+//<li>更新时间：2014-02-05</li>
 CRegexpT<TCHAR> XxbhDownloader::lastDateRegex(_T("更新时间：(\\d{4}-\\d{1,2}-\\d{1,2})"));
 //<li><a href="/comic/12912/121236.html" title="第553话" target="_blank" class="new">第553话<em></em></a></li>
-CRegexpT<TCHAR> XxbhDownloader::lastVolRegex(_T("target=\"_blank\" class=\"new\">([^\"]+?)<em></em></a></li>"));
+//<li class="ul7_li2"><a title="第663话" href="/comic/12913/128079.html" target="_blank">第663话</a></li>
+CRegexpT<TCHAR> XxbhDownloader::lastVolRegex(_T("target=\"_blank\">([^\"]+?)</a></li>"));
 //<li><a class="f_red" href="http://comic.xxbh.net/201104/189718.html" target="_blank" title="白银之匙 第1话">第1话</a></li>
-//<li><a href="http://comic.xxbh.net/201103/187880.html" target="_blank" title="死神 441话">441话</a></li>
-CRegexpT<TCHAR> XxbhDownloader::volRegex(_T("<li><a[^>]*? href=\"([^\"]+?)\" [^>]*?>([^\"]+)<em></em></a></li>"));
-//<div class="ar_list_coc">
-CRegexpT<TCHAR> XxbhDownloader::isMainRegex(_T("<div class=\"bookInfo\">"));
+//<li class="ul7_li2"><a title="第663话" href="/comic/12913/128079.html" target="_blank">第663话</a></li>
+//<li class="ul7_li1"><a title="第662话" href="/comic/12913/127186.html" target="_blank">第662话</a></li>
+CRegexpT<TCHAR> XxbhDownloader::volRegex(_T("<a[^>]*? href=\"([^\"]+?)\" [^>]*?>([^\"]+)</a></li>"));
+//<div class="left2">
+CRegexpT<TCHAR> XxbhDownloader::isMainRegex(_T("<div class=\"left2\">"));
 
 VOID Get_images_arr(CString& t,vector<CString>& imgs ){
 

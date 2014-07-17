@@ -65,8 +65,12 @@ vector<CString> Acg178Downloader::GetPicUrls( CString& strid )
     
 
 	vector<CString> a;
+	
+	CString url=strid;
+	if(strid.Find(_T("/"))==0){
+		url=server+strid;
+	}
 
-	CString url=server+strid;
 	//20110603因格式改变修改
 	//CString url=strid;
 
@@ -123,7 +127,7 @@ vector<CString> Acg178Downloader::GetPicUrls( CString& strid )
 	CString isFast=resp.Mid(fastStart+fastTag1.GetLength(),fastEnd-fastStart-fastTag1.GetLength()).Trim();
 
 	if(isFast=="true"){
-		prefix=_T("http://imgfast.dmzj.com/");
+		prefix=_T("http://images.dmzj.com/");
 	}
 	if(isHot=="true"){
 		//prefix=_T("http://hot.manhua.178.com/");
@@ -186,6 +190,18 @@ VOID Acg178Downloader::PostParse()
 	volList.clear();
 	for(vector<CString>::reverse_iterator it=tmp.rbegin();it!=tmp.rend();it++){
 		volList.push_back(*it);
+	}
+
+	map<CString,CString> tmpCache(volCache);
+	volCache.clear();
+	for (map<CString,CString>::iterator iter=tmpCache.begin();iter!=tmpCache.end();iter++)
+	{
+		if(iter->second.Find(_T("/"))==0){
+			volCache.insert(make_pair(iter->first,_T("http://manhua.dmzj.com")+iter->second));
+		}else{
+			volCache.insert(make_pair(iter->first,iter->second));
+		}
+		
 	}
 
 }

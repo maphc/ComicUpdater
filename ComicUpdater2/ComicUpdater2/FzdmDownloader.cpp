@@ -2,7 +2,8 @@
 #include "PyHelper.h"
 #include "V8Helper.h"
 //<h1>死神</h1>
-CRegexpT<TCHAR> FzdmDownloader::titleRegex(_T("<h1>(.+)</h1>"));
+//<strong>火影忍者漫画</strong>
+CRegexpT<TCHAR> FzdmDownloader::titleRegex(_T("<strong>(.+?)漫画</strong>"));
 //<a href="../t/tianjiangzhiwu/6772.shtml" >第39话</a>&nbsp;<br /><span class="update2">2010-05-30</span>	
 CRegexpT<TCHAR> FzdmDownloader::lastDateRegex(_T("<span class=\"update2\">(\\d{4}-\\d{1,2}-\\d{1,2})</span>"));
 //<li><a href="555/" title="死神555话">死神555话</a></li>
