@@ -187,12 +187,12 @@ UINT DownPicThreadProc( LPVOID pParam ){
 					}
 
                     if(Downloader::USE_REAL_NAME){
-                        down->SavePicAsFile(volUrl,picList.at(j),path);
+                        down->SavePicAsFile(volUrl,j,picList.at(j),path);
                     }else{
                         CString fullName;
                         CString extName=picList.at(j).Mid(picList.at(j).ReverseFind(_T('.')));
                         fullName.Format(_T("%s/%03d%s"),path,j,extName);
-                        down->SavePicAsFile(volUrl,picList.at(j),fullName);
+                        down->SavePicAsFile(volUrl,j,picList.at(j),fullName);
                     }
                     
                     buf.Format(_T("正在下载 (%d/%d):\n %s\n到 :\n%s"),j+1,n,picList.at(j),path);

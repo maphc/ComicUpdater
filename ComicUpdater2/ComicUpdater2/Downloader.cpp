@@ -207,7 +207,11 @@ CString Downloader::UrlEncode(LPSTR szU8,UINT n){
 
 }
 
-BOOL Downloader::SavePicAsFileReally(CString volUrl,CString picUrl,CString path){
+CString Downloader::GetReferer(CString volUrl,int index,CString picUrl){
+	return volUrl;
+}
+
+BOOL Downloader::SavePicAsFileReally(CString volUrl,int index,CString picUrl,CString path){
 	CHttpFile* html=NULL;
 	HANDLE hFile=NULL;
 	try{
@@ -226,7 +230,7 @@ BOOL Downloader::SavePicAsFileReally(CString volUrl,CString picUrl,CString path)
 		if(IS_DEBUG){
 			TRACE("Down %s To %s\n",picUrl,fullPathName);
 		}else{
-			CString strReferer(volUrl);
+			CString strReferer=GetReferer(volUrl,index,picUrl);
 			strReferer.Insert(0, _T("Referer:"));
 			//strReferer.Append(_T("\nHost: 222.218.156.24"));
 
@@ -270,7 +274,7 @@ BOOL Downloader::SavePicAsFileReally(CString volUrl,CString picUrl,CString path)
 	}
 }
 
-BOOL Downloader::SavePicAsZipReally(CString volUrl,CString picUrl,CString path){
+BOOL Downloader::SavePicAsZipReally(CString volUrl,int index,CString picUrl,CString path){
 	CHttpFile* html=NULL;
 	zipFile newZipFile=NULL;
 
@@ -308,7 +312,7 @@ BOOL Downloader::SavePicAsZipReally(CString volUrl,CString picUrl,CString path){
 			//http://comic.xxbh.net/colist_130631.html
 			//http://comic.xxbh.net/201002/153506.html
 			//CString strReferer("http://manhua.dmzj.com/whtxydsqbjdl/29360.shtml");
-			CString strReferer(volUrl);
+			CString strReferer=GetReferer(volUrl,index,picUrl);
 			strReferer.Insert(0, _T("Referer: "));
 			strReferer.Append(_T("\nUser-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; Trident/7.0; rv:11.0) like Gecko"));
 
@@ -389,10 +393,10 @@ BOOL Downloader::SavePicAsZipReally(CString volUrl,CString picUrl,CString path){
 	}
 }
 
-BOOL Downloader::SavePicAsFile(CString volUrl,CString picUrl,CString path){
+BOOL Downloader::SavePicAsFile(CString volUrl,int index,CString picUrl,CString path){
 	int retry=RETRY;
 
-	while(!(USE_ZIP?SavePicAsZipReally(volUrl,picUrl,path):SavePicAsFileReally(volUrl,picUrl,path))&&retry>0){
+	while(!(USE_ZIP?SavePicAsZipReally(volUrl,index,picUrl,path):SavePicAsFileReally(volUrl,index,picUrl,path))&&retry>0){
 		
 		retry--;
 

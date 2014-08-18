@@ -25,7 +25,8 @@ protected:
 	virtual CRegexpT<TCHAR>& GetLastVolRegex();
 	virtual CRegexpT<TCHAR>& GetLastDateRegex();
 	virtual CRegexpT<TCHAR>& GetVolRegex();
-    
+    virtual CString GetReferer(CString volUrl,int index,CString picUrl);
+
 	virtual VOID GetVolUrlNamePair(CString& line,pair<CString,CString>& p);
 	//CString GetSingleUrl( CString strid, int& total, int i );
 	virtual VOID PostParse();
@@ -40,4 +41,6 @@ protected:
 		f.Replace(_T("%20"),_T("_"));
 		return f;
 	}
+
+	
 };

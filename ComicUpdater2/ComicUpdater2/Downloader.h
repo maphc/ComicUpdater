@@ -48,7 +48,7 @@ public:
 	virtual LPCTSTR GetTitle();
 	LPCTSTR GetUrl();
 	virtual void SetServer(CString server);
-	BOOL SavePicAsFile(CString volUrl,CString picUrl,CString fileName);
+	BOOL SavePicAsFile(CString volUrl,int index,CString picUrl,CString fileName);
 	virtual vector<CString> GetPicUrls(CString& url)=0;
 	vector<CString>* GetVolList();
 	map<CString,CString>* GetVolCache();
@@ -68,8 +68,8 @@ public:
 	int Downloader::httpgzdecompress(CFile* html,CString& res);
 	static vector<CString> Split(CString& str,LPTSTR token);
 protected:
-	BOOL SavePicAsFileReally(CString volUrl,CString picUrl,CString path);
-	BOOL SavePicAsZipReally(CString volUrl,CString picUrl,CString path);
+	BOOL SavePicAsFileReally(CString volUrl,int index,CString picUrl,CString path);
+	BOOL SavePicAsZipReally(CString volUrl,int index,CString picUrl,CString path);
 	CString  UTF8ToUnicode(LPCSTR szU8);
 	UINT Ansi2Utf8(LPCSTR s,LPSTR szU8);
 	CString UrlEncode(LPSTR szU8,UINT n);
@@ -88,6 +88,7 @@ protected:
 	virtual CString EncodeUrlIfNecessery(CString& picUrl){return picUrl;}
 	virtual CString EncodeFileNameIfNecessery(CString& fileName){ return fileName;}
     virtual VOID Convert2Unicode();
+	virtual CString GetReferer(CString volUrl,int index,CString picUrl);
 
 	virtual VOID LogError(CString err);
 

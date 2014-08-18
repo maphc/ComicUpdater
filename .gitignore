@@ -154,3 +154,5 @@ $RECYCLE.BIN/
 
 #python
 *.pyc
+
+*.log.*
