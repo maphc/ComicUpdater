@@ -16,9 +16,10 @@ public:
 	string replaceStatic(string s, map<string,string>& t);
 	string replaceDynamic(string s,map<string,string>& t);
 	string replaceStaticItem(string s, string from, string to );
+	string getPathByFullName(string fullName);
 	void setUser(string);
 	void setConn(string);
-
+	static string toUpper(string);
 	
 };
 

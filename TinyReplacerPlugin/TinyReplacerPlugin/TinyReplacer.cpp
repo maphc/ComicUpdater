@@ -4,11 +4,16 @@
 
 void TinyReplacer::init(){
 	char curr_dir[4096]={0};
-	GetCurrentDirectory(4096,curr_dir);
-	config_file_name=curr_dir;
+	GetModuleFileName(NULL,curr_dir,4096);
+	config_file_name=getPathByFullName(curr_dir);
 	config_file_name+="\\PlugIns\\TinyReplacer\\config.ini";
 
 	ifstream f(config_file_name);
+	if(f.fail()){
+		string msg="获取参数文件失败: "+config_file_name;
+		MessageBox(NULL,msg.c_str(), "Msg from AddIn",0);
+		return ;
+	}
 
 	string section_name;
 	while(!f.eof()){
@@ -36,6 +41,15 @@ void TinyReplacer::init(){
 		}
 
 	}
+
+	//char msgBuf[1024]={0};
+	//sprintf_s(msgBuf,1024,"STATIC: %d",tplt["STATIC"].size());
+	//MessageBox(NULL,msgBuf, "Msg from AddIn",0);
+
+}
+string TinyReplacer::getPathByFullName(string fullName){
+	return fullName.substr(0,fullName.rfind('\\'));
+
 
 }
 
@@ -71,7 +85,7 @@ string TinyReplacer::replaceDynamic(string s, map<string,string>& t ){
 	if(!conn.empty()&&schema.empty()&& tplt.find("CONN")!=tplt.end()){
 		for (map<string,string>::iterator iter=tplt["CONN"].begin();iter!=tplt["CONN"].end();iter++)
 		{
-			if (user.find(iter->first)!=string::npos)
+			if (conn.find(iter->first)!=string::npos)
 			{
 				schema=iter->second;
 				break;;
@@ -85,7 +99,7 @@ string TinyReplacer::replaceDynamic(string s, map<string,string>& t ){
 			result=replaceStaticItem(result,iter->first,schema);
 		}
 	}
-	
+
 	return result;
 
 }
@@ -99,6 +113,13 @@ string TinyReplacer::replaceStatic(string s, map<string,string>& t ){
 
 	return result;
 }
+
+string TinyReplacer::toUpper(string s){
+	string result(s);
+	transform(result.begin(), result.end(), result.begin(), ::toupper);
+	return result;
+}
+
 string TinyReplacer::replaceStaticItem(string s, string from, string to ){
 	int pos=0, last_pos=0;
 	string s_upper(s);
@@ -108,8 +129,8 @@ string TinyReplacer::replaceStaticItem(string s, string from, string to ){
 	pos=s_upper.find(from,last_pos);
 	string mark="\n, ;";
 	while((pos=s_upper.find(from,last_pos))!=string::npos  ){
-		
-		if(pos+from.size()<s.size()&& mark.find(s_upper[pos+from.size()])!=string::npos){
+
+		if ((pos + from.size() < s.size() && mark.find(s_upper[pos + from.size()]) != string::npos) || (pos + from.size() == s.size())) {
 			bool is_already_has_owner=false;
 			for(int i=pos-1;i>=0;i--){
 				if(s[i]==' '||s[i]=='\n'){
@@ -127,13 +148,13 @@ string TinyReplacer::replaceStaticItem(string s, string from, string to ){
 			}else{
 				result.append(s.substr(pos,from.size()));
 			}
-			
+
 		}else{
 			result.append(s.substr(last_pos,pos-last_pos));
 			result.append(s.substr(pos,from.size()));
 		}
-		
-		
+
+
 
 		last_pos=pos+from.size();
 	}

@@ -124,15 +124,10 @@ void DoSQLForm()
 void ShowBrowserObject()
 {
 	char *Type, *Owner, *Name;
-	char s[100];
+	char s[1025]={0};
 
 	IDE_GetBrowserInfo(&Type, &Owner, &Name);
-	s[0] = 0;
-	strcat(s, Type);
-	strcat(s, "\n");
-	strcat(s, Owner);
-	strcat(s, "\n");
-	strcat(s, Name);
+	sprintf_s(s,1024,"%s\n%s\n%s",Type,Owner,Name);
 	ShowMessage(s);
 }
 //---------------------------------------------------------------------------
@@ -186,24 +181,21 @@ void ReplaceColon(){
 void ShowConnectionInfo()
 {
 	char *Username, *Password, *Database;
-	char s[100];
+	char s[1024+1]={0};
 
 	IDE_GetConnectionInfo(&Username, &Password, &Database);
-	s[0] = 0;
-	strcat(s, Username);
-	strcat(s, "\n");
-	strcat(s, Password);
-	strcat(s, "\n");
-	strcat(s, Database);
+	sprintf_s(s,1024,"%s\n%s\n%s",Username,Password,Database);
 	ShowMessage(s);
 }
+
 //---------------------------------------------------------------------------
 void AddSchema()
 {
 	char *Username, *Password, *Database;
 	IDE_GetConnectionInfo(&Username, &Password, &Database);
-	tr.setUser(Username);
-	tr.setConn(Database);
+	
+	tr.setUser(TinyReplacer::toUpper(Username));
+	tr.setConn(TinyReplacer::toUpper(Database));
 
 	string s;
 	bool isSel=GetClientText(s);
