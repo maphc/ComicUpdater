@@ -89,7 +89,7 @@ protected:
 	virtual CString EncodeFileNameIfNecessery(CString& fileName){ return fileName;}
     virtual VOID Convert2Unicode();
 	virtual CString GetReferer(CString volUrl,int index,CString picUrl);
-
+	virtual VOID AfterGetPic();
 	virtual VOID LogError(CString err);
 
 	VOID SetProxy();

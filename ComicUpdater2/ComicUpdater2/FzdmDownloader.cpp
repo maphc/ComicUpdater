@@ -25,13 +25,22 @@ FzdmDownloader::~FzdmDownloader(void)
 {
 }
 
+CString FzdmDownloader::GetReferer(CString volUrl,int index,CString picUrl){
+	CString ref;
+	ref.Format(_T("http://manhua.fzdm.com/7/%sindex_%d.html"),volUrl,index);
+	return ref;
+}
+VOID FzdmDownloader::AfterGetPic(){
+	Sleep(1000);
+}
+
 vector<CString> FzdmDownloader::GetPicUrls( CString& strid )
 {
 	static CString prefix(_T("http://manhua.fzdm.com/"));
 	CString volUrl=this->url+strid;
 	
 	vector<CString> a;
-
+	Sleep(1000);
 	CString resp;
 	GetSimpleGet(volUrl,resp);
 	CString picHtmlUrl;
@@ -79,6 +88,7 @@ vector<CString> FzdmDownloader::GetPicUrls( CString& strid )
 			return vector<CString>();
 		}
 		lastPicUrl=picUrl;
+		Sleep(1000);
 	} while (num<=1000);
 	
 

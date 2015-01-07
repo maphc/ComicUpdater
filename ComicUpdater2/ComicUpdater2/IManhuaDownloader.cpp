@@ -60,15 +60,11 @@ vector<CString> IManhuaDownloader::GetPicUrls( CString& strid )
 }
 
 CString IManhuaDownloader::GetReferer(CString volUrl,int index,CString picUrl){
-	if(index<2){
-		return volUrl;
-	}else{
-		CString referer;
-		//TCHAR* ttt= volUrl.GetBuffer();
-		referer.Format(_T("%s?p=%d"),volUrl,index-1);
-		//volUrl.ReleaseBuffer();
-		return referer;
-	}
+	CString referer;
+	//TCHAR* ttt= volUrl.GetBuffer();
+	referer.Format(_T("%s?p=%d"),volUrl,index+1);
+	//volUrl.ReleaseBuffer();
+	return referer;
 	
 }
 

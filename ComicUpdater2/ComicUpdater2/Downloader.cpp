@@ -258,7 +258,7 @@ BOOL Downloader::SavePicAsFileReally(CString volUrl,int index,CString picUrl,CSt
 		}
 		CloseCHttpFile(html);
 		CloseHandle(hFile);
-
+		AfterGetPic();
 		return TRUE;
 	}catch(CInternetException* e){
 		TCHAR error[200]={0};
@@ -273,7 +273,9 @@ BOOL Downloader::SavePicAsFileReally(CString volUrl,int index,CString picUrl,CSt
 		return FALSE;
 	}
 }
+VOID Downloader::AfterGetPic(){
 
+}
 BOOL Downloader::SavePicAsZipReally(CString volUrl,int index,CString picUrl,CString path){
 	CHttpFile* html=NULL;
 	zipFile newZipFile=NULL;
@@ -315,14 +317,15 @@ BOOL Downloader::SavePicAsZipReally(CString volUrl,int index,CString picUrl,CStr
 			CString strReferer=GetReferer(volUrl,index,picUrl);
 			strReferer.Insert(0, _T("Referer: "));
 			strReferer.Append(_T("\nUser-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; Trident/7.0; rv:11.0) like Gecko"));
-
-			html=(CHttpFile*)session.OpenURL(addTail(EncodeUrlIfNecessery(picUrl)),1,INTERNET_FLAG_TRANSFER_BINARY | INTERNET_FLAG_RELOAD|INTERNET_FLAG_DONT_CACHE, strReferer, strReferer.GetLength());
+			
+			CString reqUrl= addTail(EncodeUrlIfNecessery(picUrl));
+			html=(CHttpFile*)session.OpenURL(reqUrl,1,INTERNET_FLAG_TRANSFER_BINARY | INTERNET_FLAG_RELOAD|INTERNET_FLAG_DONT_CACHE, strReferer, strReferer.GetLength());
 
 			DWORD dwStatusCode=0;
 			html->QueryInfoStatusCode(dwStatusCode);
 			if(dwStatusCode>399){
 				CString errTxt;
-				errTxt.Format(_T("SavePicAsZipReally %s abnormal status code :%d"),picUrl,dwStatusCode);
+				errTxt.Format(_T("SavePicAsZipReally abnormal status code: %d\nurl: %s;%s"),dwStatusCode,reqUrl,strReferer);
 				LogError(errTxt);
 				CloseCHttpFile(html);
 				return FALSE;
