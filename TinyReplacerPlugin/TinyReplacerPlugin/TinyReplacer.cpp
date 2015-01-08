@@ -42,15 +42,9 @@ void TinyReplacer::init(){
 
 	}
 
-	//char msgBuf[1024]={0};
-	//sprintf_s(msgBuf,1024,"STATIC: %d",tplt["STATIC"].size());
-	//MessageBox(NULL,msgBuf, "Msg from AddIn",0);
-
 }
 string TinyReplacer::getPathByFullName(string fullName){
 	return fullName.substr(0,fullName.rfind('\\'));
-
-
 }
 
 TinyReplacer::TinyReplacer(){
@@ -127,7 +121,7 @@ string TinyReplacer::replaceStaticItem(string s, string from, string to ){
 	string result;
 	result.reserve(s.size()*4/3);
 	pos=s_upper.find(from,last_pos);
-	string mark="\n, ;";
+	string mark="\n, ;()";
 	while((pos=s_upper.find(from,last_pos))!=string::npos  ){
 
 		if ((pos + from.size() < s.size() && mark.find(s_upper[pos + from.size()]) != string::npos) || (pos + from.size() == s.size())) {
@@ -153,8 +147,6 @@ string TinyReplacer::replaceStaticItem(string s, string from, string to ){
 			result.append(s.substr(last_pos,pos-last_pos));
 			result.append(s.substr(pos,from.size()));
 		}
-
-
 
 		last_pos=pos+from.size();
 	}
