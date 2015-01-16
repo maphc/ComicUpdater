@@ -203,6 +203,27 @@ void AddSchema()
 	
 }
 //---------------------------------------------------------------------------
+void RemoveSchema()
+{
+	char *Username, *Password, *Database;
+	IDE_GetConnectionInfo(&Username, &Password, &Database);
+
+	tr.setUser(Username);
+	tr.setConn(Database);
+
+	string s;
+	bool isSel=GetClientText(s);
+	
+	SetClientText(tr.removeSchema(s),isSel);
+
+}
+//---------------------------------------------------------------------------
+void ReloadConfig()
+{
+	tr.init();
+
+}
+//---------------------------------------------------------------------------
 void MaximizeWindow()
 {
 	int H = IDE_GetChildHandle();
@@ -290,8 +311,16 @@ char* MenuItemInterface(int Index, bool CreateMenuItem_)
 		AddSchema();
 		return NULL;
 	case 8 :
+		if (CreateMenuItem_) return "Plugins / &Plug-In 2 Demo / RemoveSchema";
+		RemoveSchema();
+		return NULL;
+	case 9 :
 		if (CreateMenuItem_) return "Plugins / &Plug-In 2 Demo / ReplaceColon ";
 		ReplaceColon();
+		return NULL;
+	case 10 :
+		if (CreateMenuItem_) return "Plugins / &Plug-In 2 Demo / ReloadConfig ";
+		ReloadConfig();
 		return NULL;
 
 	}

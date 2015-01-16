@@ -3,6 +3,7 @@
 #include "TinyReplacer.h"
 
 void TinyReplacer::init(){
+	tplt.clear();
 	char curr_dir[4096]={0};
 	GetModuleFileName(NULL,curr_dir,4096);
 	config_file_name=getPathByFullName(curr_dir);
@@ -60,6 +61,31 @@ string TinyReplacer::replace(string s ){
 	}
 
 	return s;
+}
+
+string TinyReplacer::removeSchema(string s) {
+	string result(s);
+	map<string, string>& t = tplt.at("REMOVE");
+	for (map<string, string>::iterator iter = t.begin(); iter != t.end(); iter++) {
+		result = replaceString(result, iter->first, iter->second);
+	}
+
+	return result;
+}
+
+string TinyReplacer::replaceString(string s, string from, string to) {
+	int pos = 0, last_pos = 0;
+	string s_upper(s);
+	transform(s_upper.begin(), s_upper.end(), s_upper.begin(), ::toupper);
+	string result;
+	result.reserve(s.size() * 4 / 3);
+	while ((pos = s_upper.find(from , last_pos)) != string::npos) {
+		result.append(s.substr(last_pos, pos - last_pos));
+		result.append(to);
+		last_pos = pos + from.size();
+	}
+	result.append(s.substr(last_pos));
+	return result;
 }
 
 string TinyReplacer::replaceDynamic(string s, map<string,string>& t ){
